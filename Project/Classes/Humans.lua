@@ -4,31 +4,35 @@ local Human = Actor:extend()
 math.randomseed(os.clock())
 
 function Human:new(player)
-  Human.super.new(self, "Resources/humanSample.png", 700, 600, 200)
+  Human.super.new(self, "Resources/man01.png", 700, 600, 180, nil,nil, nil, nil, 1.4,1.4)
+  self.timer = 0
 end
 
 function Human:update(dt)
-
-  Human.super.update(self,dt)
+  --Human.super.update(self,dt)
   if(sceneItems.gameController.phase == 1) then
-      Human.super.update(self,dt)
+    Human.super.update(self,dt)
     Human.chasing(self)
   elseif(sceneItems.gameController.phase == 2) then
-    Human.scaping(self)
+    Human.super.update(self,dt)
+    Human.scaping(self,dt)
   end
-  
-   
-   
 end
 
 function Human:write()
   Human.super.draw(self)
 end 
 
-function Human:scaping()
+function Human:scaping(dt)
+  self.timer = self.timer - dt
+
+  if(self.timer < 0) then
+    self.rot = math.random(360)
+    self.forward.x = math.cos(self.rot)
+    self.forward.y = math.sin(self.rot)
+    self.timer = 2
+  end
   
-  self.forward.x = math.random(-1,1)
-  self.forward.y = math.random(-1,1)
   
   self.rot = math.acos(self.forward.x)
   
