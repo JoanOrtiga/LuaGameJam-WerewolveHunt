@@ -2,9 +2,10 @@ local Actor = Actor or require "Lib/actor"
 local Character = Actor:extend()
 
 local control = {{up = "up", down = "down", left = "left", right = "right"}, { up = "w", down = "s", right = "d", left = "a"}}
+local sprite = {"Resources/W01.png", "Resources/W02.png"}
 
 function Character:new(player, posX, posY,fx,fy)
-  Character.super.new(self, "Resources/charSample.png", posX, posY, 0,fx,fy)
+  Character.super.new(self, sprite[player], posX, posY, 0,fx,fy)
   self.player = player or 1
 self.angleSpeed = 3
 self.maxSpeed = 250

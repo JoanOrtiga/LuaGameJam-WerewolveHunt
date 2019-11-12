@@ -1,15 +1,13 @@
-local Score = object:extend()
+local Actor = Actor or require ("Lib/actor")
+local Score = Actor:extend()
 
 function Score:new(points, life, increasingPoints)
-  points = Points
-  life = Life
-  increasingPoints = IncreasingPoints
+  self.points = points
+  self.life = life
+  self.increasingPoints = increasingPoints
 end
 
 function Score:update(dt)
-  if (Collision()) then
-    Points = Points + IncreasingPoints
-  end
 end
 
 function Score:draw()
