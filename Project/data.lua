@@ -1,0 +1,1 @@
+font01 = love.graphics.newFont("pong.ttf", 70)
