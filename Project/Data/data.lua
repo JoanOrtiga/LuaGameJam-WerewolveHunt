@@ -2,6 +2,8 @@
 font01 = love.graphics.newFont("Resources/snow.ttf", 75)
 font02 = love.graphics.newFont("Resources/frosty.ttf", 70)
 font03 = love.graphics.newFont("Resources/snowflake.ttf", 70)
+font04 = love.graphics.newFont("Resources/theboldfont.ttf", 70)
+
 
 love.graphics.setFont(font01)
 
