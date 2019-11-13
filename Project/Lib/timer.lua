@@ -1,18 +1,19 @@
 Object = Object or require "Lib/object"
 Timer = Object:extend()
 
-function Timer:new(time, fun, rp)
+function Timer:new(time, fun, rp, a)
   self.f = fun
   self.tAct = time
   self.tFin = time
   self.rep = rp
+  self.a = a
 end
 
 function Timer:update(dt)
   self.tAct = self.tAct - dt
   
   if(self.tAct < 0) then 
-    self.f()
+    self.f(self.a)
     
     if self.rep == true then
       self.tAct = self.tFin

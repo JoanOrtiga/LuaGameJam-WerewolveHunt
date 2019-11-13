@@ -48,6 +48,7 @@ function Character:update(dt)
   if(sceneItems.gameController.phase == 2) then
   for k,v in pairs(enemies) do
     if(Character.super.intersect(self, v)) then
+      print("z")
       if(self.player == 1) then
         sceneItems.gameController.player1Score = sceneItems.gameController.player1Score + 1
         v.delete = true
@@ -66,7 +67,6 @@ end
   
   
 function Character:limit()
-  print(self.position.x .. "  " .. love.graphics.getWidth())
   if(self.position.x > love.graphics.getWidth() - (self.image:getWidth() / 2)) then
     self.position.x = love.graphics.getWidth()  - (self.image:getWidth() / 2)
   end

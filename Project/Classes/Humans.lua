@@ -1,15 +1,15 @@
 local Actor = Actor or require "Lib/actor"
 local Human = Actor:extend()
 
-math.randomseed(os.clock())
 
 function Human:new(player)
-  Human.super.new(self, "Resources/man01.png", 700, 600, 180, nil,nil, nil, nil, 1.4,1.4)
-  self.timer = 0
+  Human.super.new(self, "Resources/man01.png", -10, -10, 180, 0,0, nil, nil, 1.4,1.4)
+   Human.randomSpawn(self)
+  
+  self.timer = 3
 end
 
 function Human:update(dt)
-  --Human.super.update(self,dt)
   if(sceneItems.gameController.phase == 1) then
     Human.super.update(self,dt)
     Human.chasing(self)
@@ -22,6 +22,36 @@ end
 function Human:write()
   Human.super.draw(self)
 end 
+
+function Human:randomSpawn()
+  local sentit = math.random(1,2)
+  
+  if(sentit == 1)then
+    local dreta_esquerra = math.random (1,2)
+    
+    if(dreta_esquerra == 1) then
+      self.forward.x = -1
+      self.forward.y = 0
+
+      self.position.x = 800
+      self.position.y = math.random(210,990)
+    elseif(dreta_esquerra == 2) then
+      self.forward.x = 1
+      self.forward.y = 0
+      
+      self.position.x = 0
+      self.position.y = math.random(210,990)
+    end
+  elseif(sentit == 2) then
+      --self.forward.x = 0
+      self.forward.y = -1
+      
+      self.position.x = math.random(10,790)
+      self.position.y = 1000
+    
+    
+  end
+end
 
 function Human:scaping(dt)
   self.timer = self.timer - dt
@@ -36,14 +66,16 @@ function Human:scaping(dt)
   
   self.rot = math.acos(self.forward.x)
   
+  if(self.timer < 2) then
   if(self.position.x > love.graphics.getWidth())then
-    self.position.x = 1
+    self.position.x = 4
   elseif(self.position.x < 0) then
-    self.position.x = love.graphics.getWidth() -1
+    self.position.x = love.graphics.getWidth() - 4
   elseif(self.position.y < 200) then
-    self.position.y = love.graphics.getHeight() -1
+    self.position.y = love.graphics.getHeight() -4
   elseif(self.position.y > love.graphics.getHeight()) then
-    self.position.y = 201
+    self.position.y = 204
+  end
   end
 end
 

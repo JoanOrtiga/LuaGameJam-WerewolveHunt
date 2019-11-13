@@ -8,6 +8,8 @@ local GameController = GameController or require("Classes/GameController")
 local Background = Background or require ("Classes/Background")
 local ScoreHUD = ScoreHUD or require ("Classes/HUD/HUD")
 
+math.randomseed(os.clock())
+
 function love.load()  
   require "Data/data"
   local background = Background()
@@ -30,6 +32,8 @@ function love.load()
 end
  
 function love.update(dt)
+  BackGround:update(dt)
+  
   for  k,v in pairs(sceneItems) do
     v:update(dt)
     if(v.delete) then
