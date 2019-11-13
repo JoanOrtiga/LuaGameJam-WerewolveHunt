@@ -15,7 +15,7 @@ function GameController:new()
   
   self.enemiesToSpawn = 8
   
-  self.spawner = nil
+  self.spawner = Timer(1, enemySpawn, true, self.enemiesToSpawn)
 end
 
 function GameController:update(dt)

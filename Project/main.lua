@@ -19,9 +19,6 @@ function love.load()
   local gameController = GameController()
   sceneItems.gameController = gameController
   
-  local hud = HUD(points, life)
-  seceneItems.hud = hud
-  
   local char1 = Char(1, 100, 100)
   sceneItems.char1 = char1
   
