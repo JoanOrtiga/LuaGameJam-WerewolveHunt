@@ -29,7 +29,9 @@ function Score:draw()
   sx = 1
   sy = 1
   rr = self.rot
-  print (self.life)
+  
+  
+  
    if (life == 3) then 
       love.graphics.draw(self.image,xx,yy,rr,sx,sy,ox,oy,0,0)
       xx = 210
