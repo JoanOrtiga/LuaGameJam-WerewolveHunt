@@ -50,10 +50,12 @@ function Character:update(dt)
     if(Character.super.intersect(self, v)) then
       print("z")
       if(self.player == 1) then
-        sceneItems.gameController.player1Score = sceneItems.gameController.player1Score + 1
+        sceneItems.gameController.player1Score = sceneItems.gameController.player1Score + 10
+        sceneItems.gameController.player1Hp = sceneItems.gameController.player1Hp + 10
         v.delete = true
       elseif(self.player == 2) then
-        sceneItems.gameController.player2Score = sceneItems.gameController.player2Score + 1
+        sceneItems.gameController.player2Score = sceneItems.gameController.player2Score + 10
+        sceneItems.gameController.player2Hp = sceneItems.gameController.player2Hp + 10
         v.delete = true
       end
     end

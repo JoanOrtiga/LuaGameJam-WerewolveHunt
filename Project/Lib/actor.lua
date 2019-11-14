@@ -21,7 +21,7 @@ function Actor:update(dt)
 end
 
 function Actor:draw()
-    xx = self.position.x
+    xx = self.position.x 
     ox = self.origin.x
     yy = self.position.y
     oy = self.origin.y
@@ -34,8 +34,8 @@ end
 
 function Actor.intersect(a, b)
     --With locals it's common usage to use underscores instead of camelCasing
-    local ax = a.position.x
-    local ay = a.position.y
+    local ax = a.position.x - a.origin.x
+    local ay = a.position.y - a.origin.y
     local aw = a.width
     local ah = a.height
 

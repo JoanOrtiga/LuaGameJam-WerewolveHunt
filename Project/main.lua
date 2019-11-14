@@ -2,66 +2,59 @@ sceneItems = {}
 enemies = {}
 HUD = {}
 
-local HUD = HUD or require ("Classes/HUD/HUD")
-local Char = Char or require("Classes/Character")
-local Human = Human or require("Classes/Humans")
-local GameController = GameController or require("Classes/GameController")
-local Background = Background or require ("Classes/Background")
-local ScoreHUD = ScoreHUD or require ("Classes/HUD/HUD")
+require "Lib/FSM/StateMachine"
+require "changingStates"
+require "Data/data"
 
 math.randomseed(os.clock())
 
 function love.load()  
-  require "Data/data"
-  local background = Background()
-  BackGround = background
   
-  local gameController = GameController()
-  sceneItems.gameController = gameController
+  GameManager = StateMachine()
   
-  local char1 = Char(1, 100, 100)
-  sceneItems.char1 = char1
-  
-  local char2 = Char(2, 100, 700)
-  sceneItems.char2 = char2
-  
-  local human = Human(1)
-  table.insert(enemies, human)
-  
-  local score = ScoreHUD()
-  table.insert(HUD, score)
+  GameManager:addState("null",{  });
+	GameManager:addState("menu",{ enter= onMenuEnter, exit= onMenuExit, from="scoreScreen"});
+	GameManager:addState("play",{ enter= onPlayEnter, exit= onPlayExit, from="menu"});
+  GameManager:addState("scoreScreen",{ enter= onScoreEnter, exit= onScoreExit, from="play"});
+  GameManager:setInitialState("menu");
 end
  
 function love.update(dt)
-  BackGround:update(dt)
   
-  for  k,v in pairs(sceneItems) do
-    v:update(dt)
-    if(v.delete) then
-        table.remove(sceneItems, k)
-    end
- end
+  if(GameManager:currentState() == "play") then
+  BackGround:update(dt)
  
- for  k,v in pairs(enemies) do
+  for  k,v in pairs(enemies) do
     v:update(dt)
     if(v.delete) then
         table.remove(enemies, k)
     end
- end
+  end 
+end
+
+for  k,v in pairs(sceneItems) do
+    v:update(dt)
+    if(v.delete) then
+        table.remove(sceneItems, k)
+    end
+  end
 end
  
 function love.draw()
+  if(GameManager:currentState() == "play") then
+
   BackGround:draw()
   
-  for  k,v in pairs(sceneItems) do
+  for  k,v in pairs(enemies) do
+    v:draw()
+  end
+ end
+ for  k,v in pairs(sceneItems) do
   v:draw()
  end
  
- for  k,v in pairs(enemies) do
-  v:draw()
- end
- 
+  
   for  k,v in pairs(HUD) do
   v:draw()
- end
+  end
 end

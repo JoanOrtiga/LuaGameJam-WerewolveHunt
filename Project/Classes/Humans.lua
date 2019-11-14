@@ -90,9 +90,13 @@ function Human:chasing()
   end
   
   if(Human.super.intersect(self,sceneItems.char1)) then
+    sceneItems.gameController.player1Hp = sceneItems.gameController.player1Hp - 5
     self.delete = true
   elseif(Human .super.intersect(self, sceneItems.char2)) then
     self.delete = true
+        sceneItems.gameController.player2Hp =     sceneItems.gameController.player2Hp - 5
+
+
   end  
 end
 
