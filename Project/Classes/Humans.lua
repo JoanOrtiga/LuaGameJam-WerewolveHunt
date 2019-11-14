@@ -1,20 +1,24 @@
 local Actor = Actor or require "Lib/actor"
 local Human = Actor:extend()
 
+local night = {"Resources/man01.png", "Resources/man02.png"}
+local day = {"Resources/Weapon01.png", "Resources/Weapon02.png"}
 
 function Human:new(player)
-  Human.super.new(self, "Resources/man01.png", -10, -10, 180, 0,0, nil, nil, 1.4,1.4)
+  
+  self.skin = math.random(1,2)
+  Human.super.new(self,night[self.skin] , -10, -10, 180, 0,0, nil, nil, 1.4,1.4)
    Human.randomSpawn(self)
   
   self.timer = 3
 end
 
-function Human:update(dt)
+function Human:update(dt) 
+  Human.super.update(self,dt)
   if(sceneItems.gameController.phase == 1) then
-    Human.super.update(self,dt)
     Human.chasing(self)
   elseif(sceneItems.gameController.phase == 2) then
-    Human.super.update(self,dt)
+   
     Human.scaping(self,dt)
   end
 end
@@ -33,6 +37,7 @@ function Human:randomSpawn()
       self.forward.x = -1
       self.forward.y = 0
 
+      self.rot = math.rad(180)
       self.position.x = 800
       self.position.y = math.random(210,990)
     elseif(dreta_esquerra == 2) then
@@ -43,17 +48,17 @@ function Human:randomSpawn()
       self.position.y = math.random(210,990)
     end
   elseif(sentit == 2) then
-      --self.forward.x = 0
+      self.forward.x = 0
       self.forward.y = -1
-      
+  
+      self.rot = math.rad(-90)
       self.position.x = math.random(10,790)
       self.position.y = 1000
-    
-    
   end
 end
 
 function Human:scaping(dt)
+  self.image = love.graphics.newImage(night[self.skin])
   self.timer = self.timer - dt
 
   if(self.timer < 0) then
@@ -64,7 +69,7 @@ function Human:scaping(dt)
   end
   
   
-  self.rot = math.acos(self.forward.x)
+  --self.rot = math.acos(self.forward.x)
   
   if(self.timer < 2) then
   if(self.position.x > love.graphics.getWidth())then
@@ -76,10 +81,12 @@ function Human:scaping(dt)
   elseif(self.position.y > love.graphics.getHeight()) then
     self.position.y = 204
   end
-  end
+end
 end
 
 function Human:chasing()
+  self.image = love.graphics.newImage(day[self.skin])
+  
   local dist1 = sceneItems.char1.position.distance(sceneItems.char1.position, self.position)
   local dist2 = sceneItems.char2.position.distance(sceneItems.char2.position, self.position)
 

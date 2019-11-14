@@ -10,11 +10,14 @@ end
 
 function Background:draw()
   Background.super.draw(self)
+  
+  if(GameManager:currentState() == "menu") then
+  love.graphics.setFont(font03)
+  love.graphics.print("The WereWolves Hunt",63,60)
   love.graphics.setFont(font05)
-  
   love.graphics.print("Game Made by: Marina Chavarria, Joan Ortiga, Pol Serra, Julia Blasco", 175,780)
-  
   love.graphics.setFont(font04)
+  end
 end 
   
   
