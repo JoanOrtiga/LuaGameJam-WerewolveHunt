@@ -23,8 +23,6 @@ function Background:new()
 end
 
 function Background:update(dt)
-  print(self.dayBrightness .. "  " .. self.nightBrightness)
-  
   if(sceneItems.gameController.phase == 1) then
     self.sun:update(dt)
     self.moon.position.x = -100
@@ -55,6 +53,7 @@ function Background:draw()
   end
   
   Background.super.draw(self)
+  
 end 
   
   

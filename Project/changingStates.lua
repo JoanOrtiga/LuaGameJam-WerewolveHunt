@@ -3,19 +3,34 @@ local Char = Char or require("Classes/Character")
 local Human = Human or require("Classes/Humans")
 local GameController = GameController or require("Classes/GameController")
 local Background = Background or require ("Classes/Background")
+local MenuBackground = MenuBackground or require ("Classes/MenuBackground")
 local ScoreHUD = ScoreHUD or require ("Classes/HUD/HUD")
 local PlayButton = PlayButton or require ("Classes/PlayButton")
+local ExitButton = ExitButton or require ("Classes/ExitButton")
+local ScoreScreen = ScoreScreen or require ("Classes/scoreScreen")
 
 
 function onMenuEnter()
   local playButton = PlayButton()
   table.insert(sceneItems, playButton)
+  
+  local exitButton = ExitButton()
+  table.insert(sceneItems, exitButton)
+  
+   local background = MenuBackground()
+  BackGround = background
 end
 
 function onMenuExit()
   for k,v in pairs(sceneItems) do
     table.remove(sceneItems, k)
   end
+  
+  for k,v in pairs(sceneItems) do
+    table.remove(sceneItems, k)
+  end
+   
+
 end
 
 function onPlayEnter()
@@ -43,8 +58,22 @@ function onPlayExit()
     table.remove(sceneItems, k)
   end
   
+   for k,v in ipairs(enemies) do
+    table.remove(enemies, k)
+  end
+  
   for k,v in pairs(HUD) do
     table.remove(HUD, k)
+  end
+  
+  scores = {}
+  scores[1] = sceneItems.gameController.player1Score
+  scores[2] = sceneItems.gameController.player2Score
+  
+  if(sceneItems.gameController.player1Hp < sceneItems.gameController.player2Hp) then
+    scores[3] = 1
+  else
+    scores[3] = 2
   end
   
   sceneItems.char1 = nil
@@ -53,8 +82,11 @@ function onPlayExit()
 end
 
 function onScoreEnter()
-  --local score = ScoreHUD()
-  --table.insert(sceneItems, score)
+  local background = MenuBackground()
+  BackGround = background
+  
+  local scoreScreen = ScoreScreen()
+  table.insert(sceneItems, scoreScreen)
 end
 
 function onScoreExit()

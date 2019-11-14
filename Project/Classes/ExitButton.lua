@@ -1,11 +1,11 @@
 local Actor = Actor or require "Lib/actor"
-local PlayButton = Actor:extend()
+local ExitButton = Actor:extend()
 
-function PlayButton:new()
-  PlayButton.super.new(self,"Resources/menu/play.png",love.graphics.getWidth()/2, 550)
+function ExitButton:new()
+  ExitButton.super.new(self,"Resources/menu/exit.png",love.graphics.getWidth()/2, 700)
 end
 
-function PlayButton:update(dt)
+function ExitButton:update(dt)
   local z = {}
   z.position = {}
   z.position.x = love.mouse.getX()
@@ -13,12 +13,12 @@ function PlayButton:update(dt)
   z.width = 1
   z.height = 1
   
-  if(love.mouse.isDown(1) and PlayButton.super.intersect(self, z))then
-    GameManager:changeState("play")
+  if(love.mouse.isDown(1) and ExitButton.super.intersect(self, z))then
+    os.exit()
   end
 end
 
-function PlayButton:draw()
+function ExitButton:draw()
   xx = self.position.x
   ox = self.origin.x
   yy = self.position.y
@@ -29,4 +29,4 @@ function PlayButton:draw()
   love.graphics.draw(self.image,xx,yy,rr,sx,sy,ox,oy,0,0)
 end
 
-return PlayButton
+return ExitButton

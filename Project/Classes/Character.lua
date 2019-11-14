@@ -48,7 +48,6 @@ function Character:update(dt)
   if(sceneItems.gameController.phase == 2) then
   for k,v in pairs(enemies) do
     if(Character.super.intersect(self, v)) then
-      print("z")
       if(self.player == 1) then
         sceneItems.gameController.player1Score = sceneItems.gameController.player1Score + 10
         sceneItems.gameController.player1Hp = sceneItems.gameController.player1Hp + 10

@@ -12,11 +12,11 @@ function Score:update(dt)
 end
 
 function Score:draw()
-  love.graphics.print(sceneItems.gameController.player1Score, 10,10)
-  love.graphics.print(sceneItems.gameController.player2Score, 790,10,nil,nil,nil,font04:getWidth(sceneItems.gameController.player2Score))
+  love.graphics.print(sceneItems.gameController.player1Score, 320,150 ,nil,nil,nil,font04:getWidth(sceneItems.gameController.player1Score))
+  love.graphics.print(":Score:" .. sceneItems.gameController.player2Score, 320,150)
 
-  love.graphics.print(sceneItems.gameController.player1Hp, 10,130)
-  love.graphics.print(sceneItems.gameController.player2Hp, 790,130,nil,nil,nil,font04:getWidth(sceneItems.gameController.player2Hp))
+  love.graphics.print("HP:" ..sceneItems.gameController.player1Hp, 10,150)
+  love.graphics.print(sceneItems.gameController.player2Hp .. ":HP", 790,150,nil,nil,nil,font04:getWidth(sceneItems.gameController.player2Hp .. ":HP"))
 
   xx = 150
   ox = self.origin.x

@@ -20,9 +20,10 @@ function love.load()
 end
  
 function love.update(dt)
+  BackGround:update(dt)
   
   if(GameManager:currentState() == "play") then
-  BackGround:update(dt)
+  
  
   for  k,v in pairs(enemies) do
     v:update(dt)
@@ -41,10 +42,11 @@ for  k,v in pairs(sceneItems) do
 end
  
 function love.draw()
+   BackGround:draw()
+  
   if(GameManager:currentState() == "play") then
 
-  BackGround:draw()
-  
+ 
   for  k,v in pairs(enemies) do
     v:draw()
   end
