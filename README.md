@@ -1,4 +1,4 @@
-#WereWolves Hunt
+# WereWolves Hunt
 
 ## Lua Game Jam
 All made in 32 hours.
